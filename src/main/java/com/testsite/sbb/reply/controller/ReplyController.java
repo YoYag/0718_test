@@ -1,22 +1,28 @@
 package com.testsite.sbb.reply.controller;
 
-import com.testsite.sbb.reply.dao.ReplyRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.testsite.sbb.article.domain.Article;
+import com.testsite.sbb.article.service.ArticleService;
+import com.testsite.sbb.reply.service.ReplyService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-@Controller
 @RequestMapping("/reply")
+@RequiredArgsConstructor
+@Controller
 public class ReplyController {
 
-    @Autowired
-    private ReplyRepository replyRepository;
+    private final ArticleService articleService;
+    private final ReplyService replyService;
 
-    // 단건조회
-//    @RequestMapping("/detail")
-//    @ResponseBody
-//    public Reply showReply(@RequestParam long id) {
-//        Optional<Reply> opr = replyRepository.findById((int)id);
-//        return opr.orElse(null);
-//    }
+    @PostMapping("/create/{id}")
+    public String createreply(Model model, @PathVariable("id") Integer id, @RequestParam String content) {
+        Article article = this.articleService.getArticle(id);
+        this.replyService.create(article, content);
+        return String.format("redirect:/article/detail/%s", id);
+    }
 }

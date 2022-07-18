@@ -1,10 +1,12 @@
 package com.testsite.sbb.article.domain;
 
+import com.testsite.sbb.reply.domain.Reply;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -12,7 +14,7 @@ import java.time.LocalDateTime;
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
     private LocalDateTime createDate;
 
@@ -21,4 +23,7 @@ public class Article {
 
     @Column(columnDefinition = "TEXT")
     private String content;
+
+    @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
+    private List<Reply> replyList;
 }

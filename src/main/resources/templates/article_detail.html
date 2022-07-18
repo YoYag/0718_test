@@ -1,0 +1,18 @@
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+    <title>Article 상세</title>
+</head>
+<body></body>
+<h1 th:text="${article.subject}"></h1>
+<div th:text="${article.content}"></div>
+<h5 th:text="|${#lists.size(article.replyList)}개의 답변이 있습니다.|"></h5>
+<div>
+    <ul>
+        <li th:each="reply : ${article.replyList}" th:text="${reply.content}"></li>
+    </ul>
+</div>
+<form th:action="@{|/reply/create/${article.id}|}" method="post">
+    <textarea name="content" id="content" rows="15"></textarea>
+    <input type="submit" value="답변등록">
+</form>
