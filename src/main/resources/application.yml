@@ -1,6 +1,11 @@
 server:
   port: 8088
 spring:
+  devtools:
+    livereload:
+      enabled: true
+  freemarker:
+    cache: false
   thymeleaf:
     cache: false
     prefix: file:src/main/resources/templates/
