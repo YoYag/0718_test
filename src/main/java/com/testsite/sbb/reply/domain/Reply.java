@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class Reply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(columnDefinition = "TEXT")
     private String content;

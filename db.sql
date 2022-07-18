@@ -1,7 +1,7 @@
 # DB 생성
-DROP DATABASE IF EXISTS sbb;
-CREATE DATABASE sbb;
-USE sbb;
+DROP DATABASE IF EXISTS sbbtest;
+CREATE DATABASE sbbtest;
+USE sbbtest;
 
 # article 테이블 생성
 CREATE TABLE `article` (

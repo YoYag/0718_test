@@ -2,24 +2,26 @@ package com.testsite.sbb.article.controller;
 
 import com.testsite.sbb.article.dao.ArticleRepository;
 import com.testsite.sbb.article.domain.Article;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Controller
 @RequestMapping("/article")
 public class ArticleController {
 
-    @Autowired
-    private ArticleRepository articleRepository;
+    private final ArticleRepository articleRepository;
 
     // 전체조회
     @RequestMapping("/list")
-    @ResponseBody
-    public List<Article> showArticles() {
-        return articleRepository.findAll();
+    public String showArticles(Model model) {
+        List<Article> articleList = this.articleRepository.findAll();
+        model.addAttribute("articleList", articleList);
+        return "article_list";
     }
+
 }

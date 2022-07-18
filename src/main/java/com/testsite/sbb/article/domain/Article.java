@@ -12,13 +12,13 @@ import java.time.LocalDateTime;
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
+
+    private LocalDateTime createDate;
 
     @Column(length = 200)
     private String subject;
 
     @Column(columnDefinition = "TEXT")
     private String content;
-
-    private LocalDateTime createDate;
 }
