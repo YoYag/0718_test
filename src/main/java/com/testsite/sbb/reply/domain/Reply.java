@@ -20,6 +20,8 @@ public class Reply {
 
     private LocalDateTime createDate;
 
+    private Boolean likeIt;
+
     @ManyToOne
     private Article article;
 }

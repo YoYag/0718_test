@@ -21,4 +21,10 @@ public class ReplyService {
         reply.setArticle(article);
         this.replyRepository.save(reply);
     }
+
+    public void like(int id) {
+        Reply reply = replyRepository.findById(id).get();
+        reply.setLikeIt(!reply.getLikeIt());
+        this.replyRepository.save(reply);
+    }
 }

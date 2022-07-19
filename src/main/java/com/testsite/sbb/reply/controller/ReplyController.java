@@ -2,6 +2,7 @@ package com.testsite.sbb.reply.controller;
 
 import com.testsite.sbb.article.domain.Article;
 import com.testsite.sbb.article.service.ArticleService;
+import com.testsite.sbb.reply.domain.Reply;
 import com.testsite.sbb.reply.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -20,9 +21,15 @@ public class ReplyController {
     private final ReplyService replyService;
 
     @PostMapping("/create/{id}")
-    public String createreply(Model model, @PathVariable("id") Integer id, @RequestParam String content) {
+    public String createReply(Model model, @PathVariable("id") Integer id, @RequestParam String content) {
         Article article = this.articleService.getArticle(id);
         this.replyService.create(article, content);
+        return String.format("redirect:/article/detail/%s", id);
+    }
+
+    @PostMapping("/like/{id}")
+    public String likeReply(Model model, @PathVariable("id") Integer id) {
+        this.replyService.like(id);
         return String.format("redirect:/article/detail/%s", id);
     }
 }
