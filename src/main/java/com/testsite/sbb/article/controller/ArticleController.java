@@ -31,6 +31,8 @@ public class ArticleController {
     public String showDetail(Model model, @PathVariable("id") Integer id) {
         Article article = this.articleService.getArticle(id);
         model.addAttribute("article", article);
+        article.setHits(article.getHits() + 1);
+        articleRepository.save(article);
         return "article_detail";
     }
 }

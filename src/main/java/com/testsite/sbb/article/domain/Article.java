@@ -24,6 +24,8 @@ public class Article {
     @Column(columnDefinition = "TEXT")
     private String content;
 
+    private int hits;
+
     @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
     private List<Reply> replyList;
 }
